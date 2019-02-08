@@ -28,7 +28,7 @@ get '/get_user' do
    msg = JSON(result.body)['message']
    raise WrongStatusFromExternalService.new(msg,result.status)
  end
- result = JSON.parse(result)
+ result = JSON.parse(result.body)
  fulName = {:name =>result['first_name'],:surname =>result['last_name']}
  fulName.to_json
 end
