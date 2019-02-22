@@ -15,6 +15,9 @@ helpers Sinatra::Param
 before do
   content_type 'application/json'
 end
+error 404 do
+  {:message => "there was something wrong with the request #{env['sinatra.error'].message}"}.to_json
+end
 error Faraday::ConnectionFailed do
   WrongStatusFromExternalService.new(env['sinatra.error'].message,500).return_json
 end
